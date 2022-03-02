@@ -7,9 +7,9 @@ if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
     //////////////
     // WARNING => dans la vrai vie nous ferions une request à la BDD
     //////////////
-    foreach($movies as $key => $movie) {
-        if($id === $movie['id']){
-            $currentMovie = $movie;
+    foreach($articles as $key => $article) {
+        if($id === $article['id']){
+            $currentarticle = $article;
             $currentIndex = $key;
             break;
         }
