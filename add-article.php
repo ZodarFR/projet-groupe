@@ -6,11 +6,19 @@ $errors = [];
 if(!empty($_POST['submitted'])) {
     $title = trim(strip_tags($_POST['title']));
     $content  = trim(strip_tags($_POST['content']));
+<<<<<<< HEAD
 
 
     $errors = validText($errors, $title, 'title', 3, 120);
     $errors = validText($errors, $content, 'content', 3, 255);
 
+=======
+    
+
+    $errors = validText($errors, $title, 'title', 3, 120);
+    $errors = validText($errors, $content, 'content', 3, 255);
+    
+>>>>>>> cf6d25005ceb707aa6fef20ba0db24d619657324
 
 
     if(count($errors) === 0) {
@@ -19,6 +27,10 @@ if(!empty($_POST['submitted'])) {
         $query = $pdo->prepare($sql);
         $query->bindValue(':title', $title, PDO::PARAM_STR);
         $query->bindValue(':content', $content, PDO::PARAM_STR);
+<<<<<<< HEAD
+=======
+        
+>>>>>>> cf6d25005ceb707aa6fef20ba0db24d619657324
         $query->execute();
         header('Location: index.php');
     }
