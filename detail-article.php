@@ -1,38 +1,36 @@
 <?php
 require('inc/fonction.php');
 require('inc/pdo.php');
+include('inc/header.php'); 
+?>
+<div class="wrap">
 
-
-if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
-    $id = $_GET['id'];
-    //////////////
-    // WARNING => dans la vrai vie nous ferions une request à la BDD
-    //////////////
-    $sql = "SELECT * FROM blog_articles";
-    $query = $pdo->prepare($sql);
-    $query->execute();
-    $articles = $query->fetch();
-
-    foreach($articles as $key => $article) {
-        if($id === $article['id']){
-            $currentarticle = $article;
-            $currentIndex = $key;
-            break;
+<?php
+        if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
+            $id = $_GET['id'];
         }
-    }
-    //////////////
-    // END WARNING
-    //////////////
-    if(empty($currentarticle)) {
-        die('404');
-    }
-} else {
-    die('404'); // redirection
-}
-include('inc/header.php'); ?>
-    <div class="wrap">
-        
-        <?php include('view/bigarticle.php'); ?>
-        
+        $sql = "SELECT * FROM blog_articles WHERE id = :id";
+        $query = $pdo->prepare($sql);
+        $query->bindValue(':id',$id, PDO::PARAM_INT);
+        $query->execute();
+        $articles = $query->fetch();
+        debug($articles);
+    ?>
+        <section id="articles">
+            <?php foreach ($articles as $article) { ?>
+                <div class="one_article" id="ancre-<?= $article['id']; ?>">
+                    <div>
+                        <hr>
+                        <h2><a href="detail-article.php?id=<?= $article['id']; ?>"><?php echo $article['title']; ?></a></h2>
+                    
+                        <hr>
+                    </div>
+                </div>
+            <?php } ?>
+        </section>
     </div>
-<?php include('inc/footer.php');
+
+<?php
+
+
+include('inc/footer.php');
