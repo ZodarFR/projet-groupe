@@ -13,7 +13,9 @@
         <ul>
             <li><a href="index.php">Home</a></li>
             <?php if(isLogged()) { ?>
+                <p>Logged</p>
                 <li><a href="logout.php">Déconnexion</a></li>
+                <li><a href="add-article.php">Pjoutza</a> </li>
                 <?php if(isLoggedAdmin()) { ?>
                     <li><a href="admin/index.php">Admin</a></li>
                 <?php } ?>
@@ -24,4 +26,3 @@
         </ul>
     </nav>
 </header>
-
