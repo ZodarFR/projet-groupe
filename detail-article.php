@@ -21,7 +21,7 @@ include('inc/header.php');
                 <div class="one_article" id="ancre-<?= $article['id']; ?>">
                     <div>
                         <hr>
-                        <h2><a href="detail-article.php?id=<?= $article['id']; ?>"><?php echo $article['title']; ?></a></h2>
+                        <h2><?php echo $article['title']; ?></h2>
                         <p><?php echo $article['content']; ?></p>
                         <p><?php echo $article['created_at']; ?></p>
                         <hr>
