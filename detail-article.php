@@ -1,5 +1,6 @@
 <?php
 require('inc/fonction.php');
+require('inc/pdo.php');
 
 
 if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
@@ -7,6 +8,11 @@ if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
     //////////////
     // WARNING => dans la vrai vie nous ferions une request à la BDD
     //////////////
+    $sql = "SELECT * FROM blog_articles";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    $articles = $query->fetch();
+
     foreach($articles as $key => $article) {
         if($id === $article['id']){
             $currentarticle = $article;
@@ -17,7 +23,7 @@ if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
     //////////////
     // END WARNING
     //////////////
-    if(empty($currentMovie)) {
+    if(empty($currentarticle)) {
         die('404');
     }
 } else {
@@ -25,8 +31,8 @@ if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
 }
 include('inc/header.php'); ?>
     <div class="wrap">
-        <?php paginationMovie($currentIndex,$movies); ?>
-        <?php include('view/bigmovie.php'); ?>
-        <?php paginationMovie($currentIndex,$movies); ?>
+        
+        <?php include('view/bigarticle.php'); ?>
+        
     </div>
 <?php include('inc/footer.php');

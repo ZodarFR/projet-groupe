@@ -30,7 +30,7 @@ if(!empty($_POST['submitted'])) {
         
         
         $query->execute();
-        header('Location: index.php');
+        header('Location: ../index.php');
     }
 }
 
