@@ -1,7 +1,7 @@
 <?php
 require('inc/fonction.php');
 require('inc/pdo.php');
-include('inc/header.php'); 
+include('inc/header.php');
 ?>
 <div class="wrap">
 
@@ -13,7 +13,7 @@ include('inc/header.php');
         $query = $pdo->prepare($sql);
         $query->bindValue(':id',$id, PDO::PARAM_INT);
         $query->execute();
-        $articles = $query->fetch();
+        $articles = $query->fetchAll();
         debug($articles);
     ?>
         <section id="articles">
@@ -22,7 +22,7 @@ include('inc/header.php');
                     <div>
                         <hr>
                         <h2><a href="detail-article.php?id=<?= $article['id']; ?>"><?php echo $article['title']; ?></a></h2>
-                    
+
                         <hr>
                     </div>
                 </div>
