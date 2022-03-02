@@ -12,7 +12,7 @@ if(!empty($_POST['submitted'])) {
     // FailleXss
     $login    = trim(strip_tags($_POST['login']));
     $password = trim(strip_tags($_POST['password']));
-    $sql = "SELECT * FROM user WHERE pseudo = :login OR email = :login";
+    $sql = "SELECT * FROM blog_users WHERE pseudo = :login OR email = :login";
     $query = $pdo->prepare($sql);
     $query->bindValue(':login', $login, PDO::PARAM_STR);
     $query-> execute();
