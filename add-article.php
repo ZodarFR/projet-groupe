@@ -27,15 +27,8 @@ if(!empty($_POST['submitted'])) {
         $query = $pdo->prepare($sql);
         $query->bindValue(':title', $title, PDO::PARAM_STR);
         $query->bindValue(':content', $content, PDO::PARAM_STR);
-<<<<<<< HEAD
         
         
-=======
-
-
-
-
->>>>>>> 03e6061ecf68f5d5663f13e472e6b09111f01e43
         $query->execute();
         header('Location: index.php');
     }
