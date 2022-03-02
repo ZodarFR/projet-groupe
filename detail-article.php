@@ -13,15 +13,17 @@ include('inc/header.php');
         $query = $pdo->prepare($sql);
         $query->bindValue(':id',$id, PDO::PARAM_INT);
         $query->execute();
-        $articles = $query->fetch();
-        debug($articles);
+        $articles = $query->fetchall();
+        // debug($articles);
     ?>
         <section id="articles">
             <?php foreach ($articles as $article) { ?>
                 <div class="one_article" id="ancre-<?= $article['id']; ?>">
                     <div>
                         <hr>
-                        <h2><a href="detail-article.php?id=<?= $article['id']; ?>"><?php echo $article['title']; ?></a></h2>
+                        <h2><?php echo $article['title']; ?></h2>
+                        <p><?php echo $article['content']; ?></p>
+                        <p><?php echo $article['created_at']; ?></p>
                     
                         <hr>
                     </div>
