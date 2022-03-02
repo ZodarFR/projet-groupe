@@ -14,7 +14,7 @@ include('inc/header.php');
         $query->bindValue(':id',$id, PDO::PARAM_INT);
         $query->execute();
         $articles = $query->fetchAll();
-        debug($articles);
+        // debug($articles);
     ?>
         <section id="articles">
             <?php foreach ($articles as $article) { ?>
@@ -22,7 +22,8 @@ include('inc/header.php');
                     <div>
                         <hr>
                         <h2><a href="detail-article.php?id=<?= $article['id']; ?>"><?php echo $article['title']; ?></a></h2>
-
+                        <p><?php echo $article['content']; ?></p>
+                        <p><?php echo $article['created_at']; ?></p>
                         <hr>
                     </div>
                 </div>
