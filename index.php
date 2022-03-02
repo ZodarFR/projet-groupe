@@ -19,7 +19,7 @@ include('inc/header.php'); ?>
     ?>
         <section id="reves">
             <?php foreach ($articles as $article) { ?>
-                <div class="one_dream" id="ancre-<?= $dream['id']; ?>">
+                <div class="one_article" id="ancre-<?= $article['id']; ?>">
                     <div>
                         <hr>
                         <h2><?php echo $article['title']; ?></h2>

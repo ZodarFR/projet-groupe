@@ -6,11 +6,11 @@ $errors = [];
 if(!empty($_POST['submitted'])) {
     $title = trim(strip_tags($_POST['title']));
     $content  = trim(strip_tags($_POST['content']));
-    $date  = trim(strip_tags($_POST['date']));
+
 
     $errors = validText($errors, $title, 'title', 3, 120);
     $errors = validText($errors, $content, 'content', 3, 255);
-    $errors = validText($errors, $date, 'date', 3, 120);
+
 
 
     if(count($errors) === 0) {
@@ -19,7 +19,6 @@ if(!empty($_POST['submitted'])) {
         $query = $pdo->prepare($sql);
         $query->bindValue(':title', $title, PDO::PARAM_STR);
         $query->bindValue(':content', $content, PDO::PARAM_STR);
-        $query->bindValue(':date', $date, PDO::PARAM_STR);
         $query->execute();
         header('Location: index.php');
     }
