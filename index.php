@@ -16,18 +16,19 @@ include('inc/header.php'); ?>
         $query = $pdo->prepare($sql);
         $query->execute();
         $articles = $query->fetchAll();
-    ?>    
+    ?>
         <section id="reves">
             <?php foreach ($articles as $article) { ?>
                 <div class="one_dream" id="ancre-<?= $dream['id']; ?>">
                     <div>
+                        <hr>
                         <h2><?php echo $article['title']; ?></h2>
                         <p>contenu: <?php echo $article['content']; ?></p>
-                        <p>Date: <?php echo formatReveDate($article['created_at']); ?></p>
+                        <p>date: <?php echo ($article['created_at']); ?></p>
+                        <hr>
                     </div>
                 </div>
             <?php } ?>
         </section>
     </div>
 <?php include('inc/footer.php');
-
