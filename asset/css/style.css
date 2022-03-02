@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    color: black;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1.9rem;
+}
+li, a, p{
+    text-align: center;
+    font-weight: bold;
+}
+ul, ol {list-style: none;}
+.wrap {
+    max-width: 1000px;width:100%;margin: 0 auto;
+}
+.wrapform {
+    max-width: 500px;width:100%;margin: 0 auto;
+}
+img {
+    width: 100%;
+}
+header {
+    background-color:  rgb(59, 92, 59);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    
+}
+header a {
+    color: #fff; text-decoration: none;
+    font-size:1.3rem;
+}
+header a:hover{
+    color: rgb(83, 67, 67);
+    background-color:#fff;
+}
+header nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+footer {
+    background-color: rgb(83, 67, 67);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
+    color: #fff;
+}
+input[type="text"]{background-color: rgb(86, 160, 209);}
+input[type="email"]{background-color: rgb(86, 160, 209);}
+input[type="password"]{background-color: rgb(86, 160, 209);}
+
+input, textarea, select {width: 100%;padding: 1rem;
+    border: 3px solid  rgb(88, 140, 182);
+    font-weight: bold;
+    font-size: 1rem;
+}
+input[type=submit] {
+    margin-top: 1rem;cursor:pointer;
+}
+input[type=submit]:hover{
+    color: #fff;
+    background-color: rgb(50, 155, 224);
+}
+.mdpo a:hover{
+    font-size: large;
+    color:rgb(50, 155, 224);
+}
+label {display:block;margin-top: .7rem;}
+.error {
+    color:red;
+    font-size: .8rem;
+}
+h2 {text-align: center;color: rgb(59, 92, 59);}
