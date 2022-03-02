@@ -20,6 +20,7 @@ if(!empty($_POST['submitted'])) {
         $query->bindValue(':title', $title, PDO::PARAM_STR);
         $query->bindValue(':content', $content, PDO::PARAM_STR);
         
+        
         $query->execute();
         header('Location: index.php');
     }
