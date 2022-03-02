@@ -1,26 +1,32 @@
 <?php
-session_start();
-require('inc/pdo.php');
 require('inc/fonction.php');
-require('inc/request.php');
 
-include('inc/header.php');
-        $sql = "SELECT * FROM blog_articles";
-        $query = $pdo->prepare($sql);
-        $query->execute();
-        $articles = $query->fetchAll();
-    ?>
 
-<section id="reves">
-            <?php foreach ($articles as $article) { ?>
-                <div class="one_article" id="ancre-<?= $article['id']; ?>">
-                    <div>
-                        <hr>
-                        <h2><?php echo $article['title']; ?></h2>
-                        <p>contenu: <?php echo $article['content']; ?></p>
-                        <p>date: <?php echo ($article['created_at']); ?></p>
-                        <hr>
-                    </div>
-                </div>
-            <?php } ?>
-        </section>
+if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = $_GET['id'];
+    //////////////
+    // WARNING => dans la vrai vie nous ferions une request à la BDD
+    //////////////
+    foreach($movies as $key => $movie) {
+        if($id === $movie['id']){
+            $currentMovie = $movie;
+            $currentIndex = $key;
+            break;
+        }
+    }
+    //////////////
+    // END WARNING
+    //////////////
+    if(empty($currentMovie)) {
+        die('404');
+    }
+} else {
+    die('404'); // redirection
+}
+include('inc/header.php'); ?>
+    <div class="wrap">
+        <?php paginationMovie($currentIndex,$movies); ?>
+        <?php include('view/bigmovie.php'); ?>
+        <?php paginationMovie($currentIndex,$movies); ?>
+    </div>
+<?php include('inc/footer.php');

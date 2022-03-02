@@ -11,16 +11,15 @@
 <header>
     <nav>
         <ul>
-            <li><a href="index.php">Home</a></li>
+            <li><a href="../index.php">Home</a></li>
             <?php if(isLogged()) { ?>
-                               <p>Logged</p>
-                <li><a href="logout.php">Déconnexion</a></li>
+                <p>Logged</p>
+                <li><a href="../logout.php">Déconnexion</a></li>
                 <?php if(isLoggedAdmin()) { ?>
-                  ./  <li><a href="admin/add-article.php">Admin</a></li>
+                    <li><a href="admin/add-article.php">Admin</a></li>
                 <?php } ?>
             <?php } else { ?>
-                <li><a href="register.php">Inscription</a></li>
-                <li><a href="login.php">Connexion</a></li>
+                
             <?php } ?>
         </ul>
     </nav>
