@@ -10,7 +10,7 @@
 <body>
 <header>
     <nav>
-    <ul>
+        <ul>
             <li><a href="index.php">Home</a></li>
             <?php if(isLogged()) { ?>
                 <li><a href="logout.php">Déconnexion</a></li>
