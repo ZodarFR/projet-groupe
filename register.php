@@ -17,7 +17,7 @@ if(!empty($_POST['submitted'])) {
     // pseudo min 3, max 140, renseigné et unique.
     $errors = validText($errors, $pseudo,'pseudo', 3, 140);
     if(empty($errors['pseudo'])) {
-        $sql = "SELECT id FROM user WHERE pseudo = :pseudo";
+        $sql = "SELECT id FROM blog_users WHERE pseudo = :pseudo";
         $query = $pdo->prepare($sql);
         $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $query->execute();
@@ -29,7 +29,7 @@ if(!empty($_POST['submitted'])) {
     // email => email valid , unique et renseigné
     $errors = validEmail($errors, $mail, 'mail');
     if(empty($errors['mail'])) {
-        $sql = "SELECT id FROM user WHERE email = :mail";
+        $sql = "SELECT id FROM blog_users WHERE email = :mail";
         $query = $pdo->prepare($sql);
         $query->bindValue(':mail', $mail, PDO::PARAM_STR);
         $query->execute();
@@ -52,7 +52,7 @@ if(!empty($_POST['submitted'])) {
     if(count($errors) === 0) {
         $hashpassword = password_hash($password, PASSWORD_DEFAULT);
         $token = generateRandomString(70);
-        $sql = "INSERT INTO user (pseudo, email,password, token, created_at, role) VALUES (:pseudo, :mail, :password, '$token', NOW(), 'abonne')";
+        $sql = "INSERT INTO blog_users (pseudo, email,password, token, created_at, role) VALUES (:pseudo, :mail, :password, '$token', NOW(), 'abonne')";
         $query = $pdo->prepare($sql);
         $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $query->bindValue(':mail', $mail, PDO::PARAM_STR);
