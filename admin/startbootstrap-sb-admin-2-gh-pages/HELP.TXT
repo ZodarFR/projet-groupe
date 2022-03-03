@@ -1,0 +1,10 @@
+<?php for ($i = 1; $i < 4; $i = $user['id']++) { ?>
+    <tr>
+    <td><?php echo $user['email'] ?></td>
+    <td><?php echo $user['pseudo'] ?></td>
+    <td><?php echo $user['id'] ?></td>
+    <td><?php echo $user['created_at'] ?></td>
+    <td><?php echo $user['role'] ?></td>
+    <!-- <td style="overflow-x:hidden;"><?php echo $user['token'] ?></td> -->
+</tr>
+<?php } ?>
