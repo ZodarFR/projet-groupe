@@ -68,6 +68,12 @@ foreach ($users as $user) {
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="../index.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Acceuil</span></a>
+            </li>
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider">
