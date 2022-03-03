@@ -13,11 +13,13 @@ include('inc/header.php'); ?>
     <div class="wrap">
         <h2>Home Page</h2>
 <?php
-        $sql = "SELECT * FROM blog_articles";
+        $sql = "SELECT * FROM blog_articles WHERE status = 'publish'";
         $query = $pdo->prepare($sql);
         $query->execute();
         $articles = $query->fetchAll();
+        debug($articles);
     ?>
+        <br>
         <section id="reves">
             <?php foreach ($articles as $article) { ?>
                 <div class="one_article" id="ancre-<?= $article['id']; ?>">
