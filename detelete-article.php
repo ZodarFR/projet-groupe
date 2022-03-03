@@ -13,7 +13,7 @@ if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
 } else {
     die('404');
 }
-$sql = "DELETE FROM blog_articles WHERE id = :id";
+$sql = "UPDATE blog_articles SET status = 'draft' WHERE id = :id";
 $query = $pdo->prepare($sql);
 $query->bindValue(':id',$id, PDO::PARAM_INT);
 $query->execute();
