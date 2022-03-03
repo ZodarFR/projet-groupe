@@ -1,12 +1,13 @@
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6ba6dbe38ce9222695df91a74ce6f106dfd9d182
 <?php
 require('../inc/pdo.php');
 // require('inc/fonction.php');
 
-//$sql = "SELECT * FROM city WHERE CountryCode = 'TUR' ORDER BY Name ASC";
 $sql = "SELECT * FROM blog_users ORDER BY id ASC";
 $query = $pdo->prepare($sql);
-// protection injection SQL
 $query->execute();
 $users = $query->fetchAll();
 // debug($users);
@@ -437,6 +438,21 @@ foreach ($users as $user) {
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+
+                        </div>
+
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Articles</h1>
+                        </div>
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Utilisateurs</h6>
+                            </div>
+
+                            <div class="card-body">
+                                
                             </div>
                         </div>
     

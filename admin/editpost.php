@@ -7,19 +7,11 @@ if(!empty($_POST['submitted'])) {
     $title = trim(strip_tags($_POST['title']));
     $content  = trim(strip_tags($_POST['content']));
 
-
-
     $errors = validText($errors, $title, 'title', 3, 120);
     $errors = validText($errors, $content, 'content', 3, 255);
 
-
-
-
     $errors = validText($errors, $title, 'title', 3, 120);
     $errors = validText($errors, $content, 'content', 3, 255);
-
-
-
 
     if(count($errors) === 0) {
         $sql = "INSERT INTO blog_articles (title, content, created_at,status)
@@ -28,12 +20,10 @@ if(!empty($_POST['submitted'])) {
         $query->bindValue(':title', $title, PDO::PARAM_STR);
         $query->bindValue(':content', $content, PDO::PARAM_STR);
 
-
         $query->execute();
         header('Location: index.php');
     }
 }
-
 
 include('inc/header.php'); ?>
     <div class="wrapform">
@@ -50,7 +40,5 @@ include('inc/header.php'); ?>
             <input type="submit" name="submitted" value="Ajouter un article">
         </form>
     </div>
-
-
 
 <?php include('inc/footer.php');

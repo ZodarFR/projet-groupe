@@ -2,7 +2,6 @@
 session_start();
 require('inc/fonction.php');
 require('inc/pdo.php');
-include('inc/header.php');
 
         if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
             $id = $_GET['id'];
@@ -12,7 +11,24 @@ include('inc/header.php');
         $query->bindValue(':id',$id, PDO::PARAM_INT);
         $query->execute();
         $articles = $query->fetchAll();
-        // debug($articles);
+        debug($articles);
+
+////////////////////////////////////////////////////////////////////////////
+// Foreatch
+/////////////////////////////////////////////////////////
+      foreach($articles as $key => $article) {
+          if($id === $article['id']){
+              $currentArticle = $article;
+              $currentIndex = $key;
+              break;
+              }
+          }
+          if(empty($currentArticle)) {
+            die('404');
+          }
+         else {
+          die('404');
+        }
     ?>
         <section id="articles">
             <?php foreach ($articles as $article) { ?>
@@ -30,5 +46,10 @@ include('inc/header.php');
 <?php
 
 
-
-include('inc/footer.php');
+include('inc/header.php'); ?>
+<div class="wrap">
+    <?php paginationArticle($currentIndex,$articles); ?>
+    <?php include('view/bigArticle.php'); ?>
+    <?php paginationArticle($currentIndex,$articles); ?>
+</div>
+<?php include('inc/footer.php');
