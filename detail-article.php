@@ -18,7 +18,7 @@ include('inc/header.php');
         // debug($articles);
     ?>
         <section id="articles">
-            <?php foreach ($articles as $article) { ?>
+            <?php foreach ($articles as $key => $article) { ?>
                 <div class="one_article" id="ancre-<?= $article['id']; ?>">
                     <div>
                         <hr>
@@ -30,22 +30,26 @@ include('inc/header.php');
                 </div>
             <?php } ?>
         </section>
+
+        <!-- Article suivant/précedent -->
+        <?php paginationArticle($currentIndex,$articles); ?>
+
 <?php
         // ////////////////////Add Comments/////////////////////////
-        
+
         $errors = [];
 
     if(!empty($_POST['submitted'])) {
         $content = trim(strip_tags($_POST['content']));
-        
+
         $errors = validText($errors, $content, 'content', 3, 120);
-        
+
             if(count($errors) === 0) {
                 $sql = "INSERT INTO blog_comments (content, created_at,status)
                         VALUES (:content, NOW(),'publish')";
                 $query = $pdo->prepare($sql);
                 $query->bindValue(':content', $content, PDO::PARAM_STR);
-                
+
                 $query->execute();
             // header('Location: ../index.php');
             }
@@ -63,7 +67,7 @@ include('inc/header.php');
             <label for="title">Ajouter un commentaire</label>
             <input type="text" name="content" id="content" value="<?php if(!empty($_POST['content'])) {echo $_POST['content'];} ?>">
             <span class="error"><?php spanError($errors,'content'); ?></span>
-            
+
             <input type="submit" name="submitted" value="Envoyer">
         </form>
 
@@ -72,9 +76,9 @@ include('inc/header.php');
 
                 <?php } ?>
             <?php } else { ?>
-                
+
             <?php } ?>
-    
+
  <!--////////////////////////////////////VIEW CONTENT COMMMENTS//////////////////////////////////  -->
 
 
