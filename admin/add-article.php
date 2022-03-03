@@ -8,7 +8,6 @@ if(!empty($_POST['submitted'])) {
     $content  = trim(strip_tags($_POST['content']));
 
 
-
     $errors = validText($errors, $title, 'title', 3, 120);
     $errors = validText($errors, $content, 'content', 3, 255);
 

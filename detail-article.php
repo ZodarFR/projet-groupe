@@ -70,8 +70,9 @@ include('inc/header.php');
  <?php  if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
             $id = $_GET['id'];
         }
-        $sql = "SELECT * FROM blog_comments";
+        $sql = "SELECT * FROM blog_comments WHERE id = :id";
         $query = $pdo->prepare($sql);
+        $query->bindValue(':id',$id, PDO::PARAM_INT);
         $query->execute();
         $comments = $query->fetchAll();
         debug($comments);
