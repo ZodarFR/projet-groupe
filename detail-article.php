@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('inc/fonction.php');
 require('inc/pdo.php');
 include('inc/header.php');
@@ -55,8 +56,9 @@ include('inc/header.php');
 
 ?>
 
-    
-    <div class="commentaire">
+<?php if(isLogged()) { ?>
+                            <p>Logged</p>
+                <div class="commentaire">
         <form action="" method="post" novalidate>
             <label for="title">Ajouter un commentaire</label>
             <input type="text" name="content" id="content" value="<?php if(!empty($_POST['content'])) {echo $_POST['content'];} ?>">
@@ -66,30 +68,17 @@ include('inc/header.php');
         </form>
 
     </div>
- <!--////////////////////////////////////VIEW CONTENT COMMMENTS//////////////////////////////////  -->
- <?php  if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
-            $id = $_GET['id'];
-        }
-        $sql = "SELECT * FROM blog_comments WHERE id = :id";
-        $query = $pdo->prepare($sql);
-        $query->bindValue(':id',$id, PDO::PARAM_INT);
-        $query->execute();
-        $comments = $query->fetchAll();
-        debug($comments);
-    ?>
-        <section id="comments">
-            <?php foreach ($comments as $comment) { ?>
-                <div class="one_article" id="ancre-<?= $comment['id']; ?>">
-                    <div>
-                        <hr>
-                        <h2><?php echo $comment['content']; ?></h2>
-                        <hr>
-                    </div>
-                </div>
-            <?php } ?>
-        </section
-    
+                <?php if(isLoggedAdmin()) { ?>
 
+                <?php } ?>
+            <?php } else { ?>
+                
+            <?php } ?>
+    
+ <!--////////////////////////////////////VIEW CONTENT COMMMENTS//////////////////////////////////  -->
+
+
+    <?php include('view/viewcomment.php'); ?>
 
 
 <?php
