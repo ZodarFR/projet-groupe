@@ -4,6 +4,7 @@ require('inc/pdo.php');
 require('inc/fonction.php');
 require('inc/request.php');
 
+
 $errors = array();
 
 
@@ -23,7 +24,14 @@ include('inc/header.php'); ?>
                     <div>
                         <hr>
                         <h2><a href="detail-article.php?id=<?= $article['id']; ?>"><?php echo $article['title']; ?></a></h2>
-                    
+                        <?php if(isLogged()) { ?>
+
+                            <?php if(isLoggedAdmin()) { ?>
+                                <a href="detelete-article.php?id=<?= $article['id']; ?>">Detelete</a>
+                            <?php } ?>
+                        <?php } else { ?>
+
+                        <?php } ?>
                         <hr>
                     </div>
                 </div>
