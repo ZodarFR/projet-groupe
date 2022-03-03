@@ -36,12 +36,15 @@ include('inc/header.php');
 
     if(!empty($_POST['submitted'])) {
         $content = trim(strip_tags($_POST['content']));
+        
         $errors = validText($errors, $content, 'content', 3, 120);
+        
             if(count($errors) === 0) {
                 $sql = "INSERT INTO blog_comments (content, created_at,status)
                         VALUES (:content, NOW(),'publish')";
                 $query = $pdo->prepare($sql);
                 $query->bindValue(':content', $content, PDO::PARAM_STR);
+                
                 $query->execute();
             // header('Location: ../index.php');
             }
@@ -51,57 +54,48 @@ include('inc/header.php');
 
 
 ?>
-<?php if(isLogged()) { 
-    ?>
+
+    
     <div class="commentaire">
         <form action="" method="post" novalidate>
             <label for="title">Ajouter un commentaire</label>
             <input type="text" name="content" id="content" value="<?php if(!empty($_POST['content'])) {echo $_POST['content'];} ?>">
             <span class="error"><?php spanError($errors,'content'); ?></span>
-
+            
             <input type="submit" name="submitted" value="Envoyer">
         </form>
 
     </div>
-<?php }  ?>
+ <!--////////////////////////////////////VIEW CONTENT COMMMENTS//////////////////////////////////  -->
+ <?php  if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
+            $id = $_GET['id'];
+        }
+        $sql = "SELECT * FROM blog_comments";
+        $query = $pdo->prepare($sql);
+        $query->execute();
+        $comments = $query->fetchAll();
+        debug($comments);
+    ?>
+        <section id="comments">
+            <?php foreach ($comments as $comment) { ?>
+                <div class="one_article" id="ancre-<?= $comment['id']; ?>">
+                    <div>
+                        <hr>
+                        <h2><?php echo $comment['content']; ?></h2>
+                        <hr>
+                    </div>
+                </div>
+            <?php } ?>
+        </section
+    
+
 
 
 <?php
 
 // commentaire
 
-$errors = [];
-
-if(!empty($_POST['submitted'])) {
-    $content = trim(strip_tags($_POST['content']));
-    
-
-    $errors = validText($errors, $content, 'content', 3, 120);
-
-    if(count($errors) === 0) {
-        $sql = "INSERT INTO blog_comments (content, created_at, status)
-                VALUES (:content, NOW(),'new')";
-        $query = $pdo->prepare($sql);
-        $query->bindValue(':content', $content, PDO::PARAM_STR);
-        
-
-        $query->execute();
-        // header('Location: index.php');
-    }
-}
-
-
-?>
-  <div class="wrapform">
-      <form action="" method="post" novalidate>
-          <input type="text" name="content" id="content" value="<?php if(!empty($_POST['content'])) {echo $_POST['content'];} ?>">
-          <span class="error"><?php spanError($errors,'content'); ?></span>
 
 
 
-          <input type="submit" name="submitted" value="Ajouter un commentaire">
-      </form>
-  </div>
-
-
-<?php include('inc/footer.php');
+ include('inc/footer.php');
