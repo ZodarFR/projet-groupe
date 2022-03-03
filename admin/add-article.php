@@ -49,6 +49,7 @@ include('inc/header.php'); ?>
 
             <input type="submit" name="submitted" value="Ajouter un article">
         </form>
+
     </div>
 
 
