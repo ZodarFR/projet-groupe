@@ -19,15 +19,8 @@ include('inc/header.php'); ?>
                 <div class="one_article" id="ancre-<?= $article['id']; ?>">
                     <div>
                         <hr>
-                        <h2><a href="single.php?id=<?= $article['id']; ?>"><?php echo $article['title']; ?></a></h2>
-                        <?php if(isLogged()) { ?>
-
-                            <?php if(isLoggedAdmin()) { ?>
-                                <a href="detelete-article.php?id=<?= $article['id']; ?>">Detelete</a>
-                            <?php } ?>
-                        <?php } else { ?>
-
-                        <?php } ?>
+                        <h2><a href="single.php?id=<?= $article['id']; ?>"><?php echo $article['title']; ?></a></h2> 
+                        <a href="detelete-article.php?id=<?= $article['id']; ?>">Detelete</a>
                         <hr>
                     </div>
                 </div>
