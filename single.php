@@ -16,7 +16,7 @@ if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
     die('404');
 }
 
-  ?>  <section id="articles">
+?>  <section id="articles">
         <?php foreach ($articles as $article) { ?>
             <div class="one_article" id="ancre-<?= $article['id']; ?>">
                 <div>
@@ -39,7 +39,7 @@ $query = $pdo->prepare($sql);
 $query->bindValue(':id',$id, PDO::PARAM_INT);
 $query->execute();
 $articles = $query->fetchAll();
-debug($articles);
+// debug($articles);
 
 
 if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
@@ -50,7 +50,7 @@ $query = $pdo->prepare($sql);
 
 $query->execute();
 $comments = $query->fetchAll();
-debug($comments);
+// debug($comments);
 ?>
 <section id="articles">
     <?php foreach ($comments as $comment) { ?>
@@ -63,7 +63,8 @@ debug($comments);
         </div>
     <?php } ?>
 </section>
-
-
 <?php
+
+
+
 include('inc/footer.php');
