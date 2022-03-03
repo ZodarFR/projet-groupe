@@ -21,3 +21,13 @@ function getArticleById($id)
    $query->execute();
    return $query->fetch();
 }
+
+function getCommentById($id)
+{
+   global $pdo;
+   $sql = "SELECT * FROM blog_comments WHERE ID = :id";
+   $query = $pdo->prepare($sql);
+   $query->bindValue(':id', $id, PDO::PARAM_INT);
+   $query->execute();
+   return $query->fetch();
+}

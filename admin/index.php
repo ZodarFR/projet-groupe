@@ -6,8 +6,6 @@ require('../inc/request.php');
 
 $errors = array();
 
-include('../inc/header.php'); ?>
-    <div class="wrap">
-        <h2>Admin Home Page</h2>
+include('inc/header.php'); ?>
 
-<?php include('../inc/footer.php');
+<?php include('inc/footer.php');

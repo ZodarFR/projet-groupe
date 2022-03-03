@@ -13,10 +13,9 @@
         <ul>
             <li><a href="index.php">Home</a></li>
             <?php if(isLogged()) { ?>
-                            <p>Logged</p>
                 <li><a href="logout.php">Déconnexion</a></li>
                 <?php if(isLoggedAdmin()) { ?>
-                <li><a href="./admin/startbootstrap-sb-admin-2-gh-pages/index.php">Admin</a></li>
+                <li><a href="./admin/index.php">Admin</a></li>
                 <?php } ?>
             <?php } else { ?>
                 <li><a href="register.php">Inscription</a></li>
