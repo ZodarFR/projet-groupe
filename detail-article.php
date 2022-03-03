@@ -29,6 +29,34 @@ include('inc/header.php');
                 </div>
             <?php } ?>
         </section>
+<?php
+        // ////////////////////Add Comments/////////////////////////
+        
+        $errors = [];
+if(!empty($_POST['submitted'])) {
+    $content = trim(strip_tags($_POST['content']));
+    $errors = validText($errors, $content, 'content', 3, 120);
+    if(count($errors) === 0) {
+        $sql = "INSERT INTO blog_comments (content, created_at,status)
+                VALUES (:content, NOW(),'publish')";
+        $query = $pdo->prepare($sql);
+        $query->bindValue(':content', $content, PDO::PARAM_STR);
+        $query->execute();
+        // header('Location: ../index.php');
+    }
+}
+
+
+?>
+    <div class="commentaire">
+        <form action="" method="post" novalidate>
+            <label for="title">Ajouter un commentaire</label>
+            <input type="text" name="content" id="content" value="<?php if(!empty($_POST['content'])) {echo $_POST['content'];} ?>">
+            <span class="error"><?php spanError($errors,'content'); ?></span>
+
+            <input type="submit" name="submitted" value="Envoyer">
+        </form>
+
     </div>
 
 
