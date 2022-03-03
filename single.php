@@ -3,21 +3,20 @@ session_start();
 require('inc/fonction.php');
 require('inc/pdo.php');
 include('inc/header.php');
-?>
-<div class="wrap">
-
-<?php
 if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
-    }
+//    $acteur = getActeurById($id);
     $sql = "SELECT * FROM blog_articles WHERE id = :id";
     $query = $pdo->prepare($sql);
     $query->bindValue(':id',$id, PDO::PARAM_INT);
     $query->execute();
     $articles = $query->fetchAll();
-        // debug($articles);
-    ?>
-    <section id="articles">
+    if(empty($articles)) { die('404'); }
+} else {
+    die('404');
+}
+
+  ?>  <section id="articles">
         <?php foreach ($articles as $article) { ?>
             <div class="one_article" id="ancre-<?= $article['id']; ?>">
                 <div>
@@ -31,53 +30,39 @@ if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
         <?php } ?>
     </section>
 <?php
-        // ////////////////////Add Comments/////////////////////////
         
-$errors = [];
-
-if(!empty($_POST['submitted'])) {
-    $content = trim(strip_tags($_POST['content']));
-    
-    $errors = validText($errors, $content, 'content', 3, 120);
-    
-        if(count($errors) === 0) {
-            $sql = "INSERT INTO blog_comments (content, created_at,status)
-                    VALUES (:content, NOW(),'publish')";
-            $query = $pdo->prepare($sql);
-            $query->bindValue(':content', $content, PDO::PARAM_STR);
-            
-            $query->execute();
-        // header('Location: ../index.php');
-        }
+if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = $_GET['id'];
 }
+$sql = "SELECT * FROM blog_articles WHERE id = :id";
+$query = $pdo->prepare($sql);
+$query->bindValue(':id',$id, PDO::PARAM_INT);
+$query->execute();
+$articles = $query->fetchAll();
+debug($articles);
 
 
+if(!empty($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = $_GET['id'];
+}
+$sql = "SELECT * FROM blog_comments WHERE id_article = $id";
+$query = $pdo->prepare($sql);
 
-
+$query->execute();
+$comments = $query->fetchAll();
+debug($comments);
 ?>
-
-<?php if(isLogged()) { ?>
-    <p>Logged</p>
-        <div class="commentaire">
-            <form action="" method="post" novalidate>
-                <label for="title">Ajouter un commentaire</label>
-                <input type="text" name="content" id="content" value="<?php if(!empty($_POST['content'])) {echo $_POST['content'];} ?>">
-                <span class="error"><?php spanError($errors,'content'); ?></span>
-                
-                <input type="submit" name="submitted" value="Envoyer">
-            </form>
+<section id="articles">
+    <?php foreach ($comments as $comment) { ?>
+        <div class="one_article" id="ancre-<?= $comment['id']; ?>">
+            <div>
+                <hr>
+                <h2><?php echo $comment['content']; ?></h2>
+                <hr>
+            </div>
         </div>
-        <?php if(isLoggedAdmin()) { ?>
-
-        <?php } ?>
-<?php } else { ?>
-            
-        <?php } ?>
-    
-<!--////////////////////////////////////VIEW CONTENT COMMMENTS//////////////////////////////////  -->
-
-
-    <?php include('view/viewcomment.php'); ?>
+    <?php } ?>
+</section>
 
 
 <?php
