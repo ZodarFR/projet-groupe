@@ -6,7 +6,7 @@ $errors = [];
 if(!empty($_POST['submitted'])) {
     $title = trim(strip_tags($_POST['title']));
     $content  = trim(strip_tags($_POST['content']));
-
+    
 
 
     $errors = validText($errors, $title, 'title', 3, 120);
@@ -22,11 +22,12 @@ if(!empty($_POST['submitted'])) {
 
 
     if(count($errors) === 0) {
-        $sql = "INSERT INTO blog_articles (title, content, created_at,status)
+        $sql = "INSERT INTO blog_articles ( title, content, created_at,status)
                 VALUES ( :title,:content, NOW(),'publish')";
         $query = $pdo->prepare($sql);
         $query->bindValue(':title', $title, PDO::PARAM_STR);
         $query->bindValue(':content', $content, PDO::PARAM_STR);
+        // $query->bindValue(':id_article', $id_article, PDO::PARAM_INT);
 
 
         $query->execute();
