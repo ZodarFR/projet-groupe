@@ -1,7 +1,7 @@
 <?php
 require('../inc/pdo.php');
-require('inc/fonction.php');
-require('inc/request.php');
+require_once('inc/fonction.php');
+
 $errors = [];
 if(!empty($_POST['submitted'])) {
     $title = trim(strip_tags($_POST['title']));
@@ -24,11 +24,10 @@ if(!empty($_POST['submitted'])) {
         header('Location: index.php');
     }
 }
-
-include('inc/header.php'); ?>
+?>
     <div class="wrapform">
         <form action="" method="post" novalidate>
-            <label for="title">title</label>
+            <label for="title">Titre de l'article</label>
             <input type="text" name="title" id="title" value="<?php if(!empty($_POST['title'])) {echo $_POST['title'];} ?>">
             <span class="error"><?php spanError($errors,'title'); ?></span>
 
@@ -40,5 +39,3 @@ include('inc/header.php'); ?>
             <input type="submit" name="submitted" value="Ajouter un article">
         </form>
     </div>
-
-<?php include('inc/footer.php');
