@@ -100,3 +100,25 @@ function urlRemovelast($url) {
     return implode('/', $url);
 }
 
+
+function paginationArticle($index, $articles) {
+    $keyPrecedent = $index - 1;
+    if($index > 0) {
+        echo '<a href="detail.php?id='. $articles[$keyPrecedent]['id'].'">Précédent</a>';
+    }
+    $keySuivant = $index + 1;
+    if($index < count($articles) - 1) {
+        echo '<a href="detail.php?id='. $articles[$keySuivant]['id'].'">Suivant</a>';
+    }
+}
+
+function paginationMovie($index, $movies) {
+    $keyPrecedent = $index - 1;
+    if($index > 0) {
+        echo '<a href="detail.php?id='. $movies[$keyPrecedent]['id'].'">Précédent</a>';
+    }
+    $keySuivant = $index + 1;
+    if($index < count($movies) - 1) {
+        echo '<a href="detail.php?id='. $movies[$keySuivant]['id'].'">Suivant</a>';
+    }
+}
