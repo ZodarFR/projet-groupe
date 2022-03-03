@@ -74,16 +74,16 @@ $errors = [];
 
 if(!empty($_POST['submitted'])) {
     $content = trim(strip_tags($_POST['content']));
-    $id_article = trim(strip_tags($_POST['id_article']));
+    
 
     $errors = validText($errors, $content, 'content', 3, 120);
 
     if(count($errors) === 0) {
-        $sql = "INSERT INTO blog_comments (id_article, content, created_at, status)
-                VALUES (:id_article, :content, NOW(),'new')";
+        $sql = "INSERT INTO blog_comments (content, created_at, status)
+                VALUES (:content, NOW(),'new')";
         $query = $pdo->prepare($sql);
         $query->bindValue(':content', $content, PDO::PARAM_STR);
-        $query->bindValue(':id_article', $id_article, PDO::PARAM_STR);
+        
 
         $query->execute();
         // header('Location: index.php');
